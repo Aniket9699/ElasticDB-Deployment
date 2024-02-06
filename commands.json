@@ -1,0 +1,46 @@
+GET _cat/indices?v
+
+PUT employee_c1049539
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "city": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+GET employee_c1049539/_search
+POST _reindex
+{
+  "source": {
+    "index": "employee_c1049539"
+  },
+  "dest": {
+    "index": "employee_c1049540"
+  }
+}
+POST _aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "employee_c1049540",
+        "alias": "employee"
+      }
+    }
+  ]
+}
+GET _cat/aliases?v
+
