@@ -44,3 +44,14 @@ POST _aliases
 }
 GET _cat/aliases?v
 
+POST _aliases
+{
+  "actions": [
+    {
+      "remove": {
+        "index": "employee_c1049540",
+        "alias": "employee"
+      }
+    }
+  ]
+}
