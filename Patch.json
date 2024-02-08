@@ -84,3 +84,21 @@ POST /Index1/_doc/6/_update
     }
 }
 
+POST _reindex
+{
+  "source": {
+    "index": "employee_c1049539",
+    "query": {
+      "range": {
+        "_id": {
+          "gte": 1,
+          "lte": 5
+        }
+      }
+    }
+  },
+  "dest": {
+    "index": "employee_c1049540"
+  }
+}
+
