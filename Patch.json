@@ -1,0 +1,86 @@
+PUT Index1
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "city": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+POST /_aliases
+{
+    "actions": [
+        {
+            "add": {
+                "index": "Index1",
+                "alias": "Indices"
+            }
+        }
+    ]
+}
+
+POST Index1/_doc/1
+{
+  "name":"abc",
+  "age":"25",
+  "city":"Pune"
+}
+POST Index1/_doc/2
+{
+  "name":"efg",
+  "age":"22",
+  "city":"Pune"
+}
+POST Index1/_doc/3
+{
+  "name":"hij",
+  "age":"23",
+  "city":"Pune"
+}
+POST Index1/_doc/4
+{
+  "name":"klm",
+  "age":"20",
+  "city":"Pune"
+}
+POST Index1/_doc/5
+{
+  "name":"nop",
+  "age":"22",
+  "city":"Pune"
+}
+POST Index1/_doc/6
+{
+  "name":"xyz",
+  "age":"23",
+  "city":"Pune"
+}
+
+POST /Index1/_doc/4/_update
+{
+  "doc" : {
+    "name" :"uvw" 
+  }
+}
+
+POST /Index1/_doc/6/_update
+{
+    "doc" : {
+        "age" :"22",
+        "city" :"Nagpur"
+    }
+}
+
