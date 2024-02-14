@@ -1,0 +1,14 @@
+Deployment Approaches:
+a. Image-related Deployment:
+- This approach involves updating application images directly into the UAT Azure Container Registry (ACR). The Release Team is responsible for applying the target YAML file and verifying pod status.
+- Process: Application Team pushes the updated image into UAT ACR, Release Team applies the target YAML file, and verifies pod status.
+
+b. Functional Changes Deployment:
+- Functional changes deployment employs a backup-restore utility. The deployment process follows the outlined steps:
+b1. Developer commits changes in the lower environment.
+b2. Changes are promoted to higher environments by generating a JSON file from source environment using the utility (also known as Backup operation).
+b3. Upon generating the JSON file for deployment, a rollback file is also generated from the target environment.
+b4. Deployment is initiated using the JSON file generated for deployment through the utility.
+b5. Following deployment via the utility, the deploy operation must also be executed from the Application Team's platform.
+b6. Pod status is checked post-deployment.
+b7. In case of rollback necessity, the process is executed using the JSON generated in step b3, replicating each step similar to deployment.
