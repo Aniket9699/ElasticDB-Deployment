@@ -154,7 +154,7 @@ lines.each { line ->
     def trimmedLine = line.trim()
     if (trimmedLine.startsWith('GET') || trimmedLine.startsWith('POST') || trimmedLine.startsWith('PUT') || trimmedLine.startsWith('DELETE')) {
         // If data is present, add the data to the current query map
-        currentQuery['data'] = dataLine.toString()
+        currentQuery['data'] = dataLine.toString().replaceAll(/"""(.*)"""/, '$1')
         extractedData << currentQuery
 
         // Reset dataLine and currentQuery for the next query
@@ -178,7 +178,7 @@ lines.each { line ->
 }
 
 // Add the last query to the extracted data list
-currentQuery['data'] = dataLine.toString()
+currentQuery['data'] = dataLine.toString().replaceAll(/"""(.*)"""/, '$1')
 extractedData << currentQuery
 
 // Iterate over the extracted data
